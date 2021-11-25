@@ -1,0 +1,132 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Fly.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/ParallaxBackground.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/cave_0000_front.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/cave_0001_mid.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/cave_0003_color.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/cave_0002_back.png" type="Texture" id=8]
+[ext_resource path="res://Audio/Movin' Up - Dan Lebowitz.mp3" type="AudioStream" id=9]
+
+[node name="Main" type="Node"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Fly" parent="." instance=ExtResource( 1 )]
+position = Vector2( 543.847, 300 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2( 300, 300 )
+scale = Vector2( 0.15, 0.15 )
+transform = Transform2D( 0.15, 0, 0, 0.15, 300, 300 )
+follow_viewport_enable = true
+script = ExtResource( 4 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 7 )
+
+[node name="SP3" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SP3"]
+texture = ExtResource( 7 )
+offset = Vector2( 4000, 0 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+z_index = 4
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 8 )
+
+[node name="SP2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+z_index = 4
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SP2"]
+texture = ExtResource( 8 )
+offset = Vector2( 4000, 0 )
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+z_index = 8
+motion_scale = Vector2( 1.2, 1 )
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
+texture = ExtResource( 6 )
+
+[node name="SP1" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+z_index = 8
+motion_scale = Vector2( 1.2, 1 )
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SP1"]
+texture = ExtResource( 6 )
+offset = Vector2( 4000, 0 )
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+layer = 1
+offset = Vector2( 300, 300 )
+scale = Vector2( 0.15, 0.15 )
+transform = Transform2D( 0.15, 0, 0, 0.15, 300, 300 )
+follow_viewport_enable = true
+script = ExtResource( 4 )
+
+[node name="ParallaxLayer0" type="ParallaxLayer" parent="ParallaxBackground2"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+z_index = 100
+motion_scale = Vector2( 2, 1 )
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground2/ParallaxLayer0"]
+z_index = 10
+texture = ExtResource( 5 )
+
+[node name="SP0" type="ParallaxLayer" parent="ParallaxBackground2"]
+modulate = Color( 0.556863, 0.494118, 0.494118, 1 )
+z_index = 100
+motion_scale = Vector2( 2, 1 )
+motion_mirroring = Vector2( 4000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground2/SP0"]
+z_index = 10
+texture = ExtResource( 5 )
+offset = Vector2( 4000, 0 )
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+margin_right = 1024.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/CenterContainer"]
+margin_left = 453.0
+margin_top = 13.0
+margin_right = 571.0
+margin_bottom = 27.0
+text = "Distance Traveled:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
